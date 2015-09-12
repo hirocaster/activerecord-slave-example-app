@@ -52,3 +52,21 @@ production:
   database: activerecord-slave-example-app_production
   username: activerecord-slave-example-app
   password: <%= ENV['ACTIVERECORD-SLAVE-EXAMPLE-APP_DATABASE_PASSWORD'] %>
+
+master: &master
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password: msandbox
+  host: 127.0.0.1
+  port: 21891
+  database: activerecord-slave-example-app_<%= Rails.env %>
+
+slave1:
+  <<: *master
+  port: 21892
+
+slave2:
+  <<: *master
+  port: 21893
